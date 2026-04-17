@@ -1402,7 +1402,16 @@ export default function ComponentsShowcase() {
                       A ready-to-use chat interface component that integrates with the LLM system.
                       Features markdown rendering, auto-scrolling, and loading states.
                     </p>
-                    <p className="mt-2">
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </section>
+        </div>
+      </main>
+    </div>
+  );
+}
                       This is a demo with simulated responses. In a real app, you'd connect it to a tRPC mutation.
                     </p>
                   </div>
