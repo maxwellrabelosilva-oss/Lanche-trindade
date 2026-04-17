@@ -7,7 +7,18 @@ export const getLoginUrl = () => {
   const redirectUri = `${window.location.origin}/api/oauth/callback`;
   const state = btoa(redirectUri);
 
-  const url = new URL(`${oauthPortalUrl}/app-auth`);
+  // Validate that oauthPortalUrl is provided and is a valid URL
+  if (!oauthPortalUrl) {
+    throw new Error("VITE_OAUTH_PORTAL_URL environment variable is not configured");
+  }
+
+  let url: URL;
+  try {
+    url = new URL(`${oauthPortalUrl}/app-auth`);
+  } catch (error) {
+    throw new Error(`Invalid VITE_OAUTH_PORTAL_URL: "${oauthPortalUrl}" is not a valid URL`);
+  }
+
   url.searchParams.set("appId", appId);
   url.searchParams.set("redirectUri", redirectUri);
   url.searchParams.set("state", state);
