@@ -1,0 +1,17 @@
+[build]
+builder = "nixpacks"
+buildCommand = "pnpm build"
+
+[start]
+cmd = "pnpm start"
+
+[deploy]
+numReplicas = 1
+startCommand = "pnpm start"
+healthcheckPath = "/api/trpc"
+healthcheckTimeout = 100
+
+[[services]]
+name = "web"
+protocol = "http"
+port = 3000

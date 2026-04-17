@@ -37,10 +37,13 @@ queryClient.getMutationCache().subscribe(event => {
   }
 });
 
+// Determine API URL: use backend URL if in production, else use relative path for dev
+const apiUrl = import.meta.env.VITE_API_URL || "/api/trpc";
+
 const trpcClient = trpc.createClient({
   links: [
     httpBatchLink({
-      url: "/api/trpc",
+      url: apiUrl,
       transformer: superjson,
       fetch(input, init) {
         return globalThis.fetch(input, {

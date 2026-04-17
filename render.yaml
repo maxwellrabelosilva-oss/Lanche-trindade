@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: cardapio-backend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: pnpm install && pnpm build
+    startCommand: pnpm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: VITE_APP_ID
+        sync: false
+      - key: VITE_OAUTH_PORTAL_URL
+        sync: false
+    autoDeploy: true
+    
+  - type: web
+    name: cardapio-frontend
+    buildFilter:
+      paths:
+        - src/**
+        - client/**
+        - vite.config.ts
+        - package.json
+    env: static
+    buildCommand: pnpm install && pnpm build && cp -r dist/** /var/www
+    staticPublishPath: dist
+    autoDeploy: true
