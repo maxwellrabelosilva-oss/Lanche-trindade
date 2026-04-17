@@ -5,24 +5,12 @@
   "buildCommand": "pnpm build",
   "outputDirectory": "dist",
   "devCommand": "pnpm run dev",
-  "framework": null,
-  "functions": {
-    "dist/index.js": {
-      "runtime": "nodejs20.x"
-    }
-  },
-  "routes": [
-    {
-      "src": "/api/trpc(.*)",
-      "dest": "/dist/index.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ],
+  "framework": "react",
   "env": {
     "NODE_ENV": "production"
   },
-  "regions": ["sfo1"]
+  "regions": ["sfo1"],
+  "github": {
+    "enabled": false
+  }
 }
