@@ -83,7 +83,9 @@ export default function AdminPanel() {
   );
 
   // Fetch store config
-  const { data: storeConfig } = trpc.storeConfig.get.useQuery();
+  const { data: storeConfig, refetch: refetchConfig } = trpc.storeConfig.get.useQuery(undefined, {
+    refetchInterval: 3000,
+  });
 
   // Mutations
   const createMutation = trpc.menu.create.useMutation();
@@ -190,8 +192,11 @@ export default function AdminPanel() {
       await updateConfigMutation.mutateAsync(dataToSubmit);
       toast.success("Configurações atualizadas com sucesso!");
       
-      // Refetch menu to update Home.tsx with new config
-      setTimeout(() => refetchMenu(), 500);
+      // Refetch config to update Home.tsx with new settings
+      setTimeout(() => {
+        refetchConfig();
+        refetchMenu(); // Also refetch menu to trigger updates in Home
+      }, 500);
     } catch (error) {
       toast.error("Erro ao atualizar configurações");
       console.error(error);

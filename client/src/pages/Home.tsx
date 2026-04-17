@@ -37,7 +37,12 @@ export default function Home() {
     refetchInterval: 3000,
   });
 
-  const { data: storeConfig } = trpc.storeConfig.get.useQuery();
+  const { data: storeConfig, refetch: refetchConfig } = trpc.storeConfig.get.useQuery(undefined, {
+    refetchInterval: 5000, // Refetch config every 5 seconds
+  });
+
+  // Get WhatsApp number from store config (available throughout component)
+  const whatsappNumber = storeConfig?.whatsappNumber || "5592993751070";
 
   useEffect(() => {
     if (menuItems) {
@@ -142,7 +147,7 @@ export default function Home() {
     ? items
     : items.filter((item) => item.categoryId === activeCategory);
 
-  const whatsappNumber = storeConfig?.whatsappNumber || "5592993751070";
+  // whatsappLink is now available - using the whatsappNumber from top
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=Lanche do Trindade - Cardápio`;
 
   const itemCount = Object.values(selectedItems).reduce((a, b) => a + b, 0);
