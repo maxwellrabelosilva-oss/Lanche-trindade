@@ -3,14 +3,9 @@
   "version": 2,
   "installCommand": "pnpm install",
   "buildCommand": "pnpm build",
-  "outputDirectory": "dist",
   "devCommand": "pnpm run dev",
-  "framework": "express",
   "env": {
     "NODE_ENV": "production"
   },
-  "regions": ["sfo1"],
-  "github": {
-    "enabled": false
-  }
+  "regions": ["sfo1"]
 }
