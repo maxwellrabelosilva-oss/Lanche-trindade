@@ -1,0 +1,1 @@
+ALTER TABLE `storeConfig` ADD `whatsappNumber` varchar(20) DEFAULT '5592993751070' NOT NULL;
