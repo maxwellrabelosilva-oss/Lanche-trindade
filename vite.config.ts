@@ -146,6 +146,24 @@ function vitePluginManusDebugCollector(): Plugin {
           }
         });
       });
+
+      // Add tRPC middleware for API development
+      try {
+        const { createNodeMiddleware } = await import("@trpc/server/adapters/node");
+        const { appRouter } = await import("./server/routers");
+        const { createContext } = await import("./server/_core/context");
+
+        const trpcMiddleware = createNodeMiddleware({
+          router: appRouter,
+          createContext,
+        });
+
+        server.middlewares.use("/api/trpc", (req, res, next) => {
+          trpcMiddleware(req, res, next);
+        });
+      } catch (e) {
+        console.warn("Failed to load tRPC middleware:", e);
+      }
     },
   };
 }
