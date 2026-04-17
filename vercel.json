@@ -3,7 +3,15 @@
   "version": 2,
   "installCommand": "pnpm install",
   "buildCommand": "pnpm build",
+  "outputDirectory": "dist",
   "devCommand": "pnpm run dev",
+  "public": true,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
   "env": {
     "NODE_ENV": "production"
   },
