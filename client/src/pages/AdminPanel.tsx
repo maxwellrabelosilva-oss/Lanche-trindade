@@ -645,6 +645,8 @@ export default function AdminPanel() {
                 />
                 <p style={{ fontSize: "0.85rem", color: "#7a7267", margin: "6px 0 0 0" }}>Formato: 55 + DDD + número (ex: 5592993751070)</p>
               </div>
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "15px" }}>
                 <div>
                   <label style={{ display: "block", color: "#f0ece4", marginBottom: "5px", fontWeight: "bold" }}>Horário de Abertura</label>
                   <Input
